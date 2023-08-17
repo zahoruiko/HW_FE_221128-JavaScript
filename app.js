@@ -1,18 +1,18 @@
-  // Задача №1
+  // Task №1
   (function changeSquareBGColor() {
-    // Ищем на странице блок с id = square
+    // We are looking for a block with id = square on the page
     let square = document.getElementById("square");
-    // прикрепляем к блоку слушатель событий движения мыши
+    // attach a listener of mouse movement events to the block
     square.addEventListener("mouseover", () => {
-      // интенсивность красного цвета (случайное значение в интервале от 0 до 255)
+      // red color intensity (random value in the range from 0 to 255)
       let redIntensity = 255 * Math.random();
-      // интенсивность зеленого цвета (случайное значение в интервале от 0 до 255)
+      // green color intensity (random value in the range from 0 to 255)
       let greenIntensity = 255 * Math.random();
-      // интенсивность голубого цвета (случайное значение в интервале от 0 до 255)
+      // blue color intensity (random value in the range from 0 to 255)
       let blueIntensity = 255 * Math.random();
-      // Устанавливаем блоку цвет фона
+      // Setting the background color block
       square.style.backgroundColor = `rgb(${redIntensity}, ${greenIntensity}, ${blueIntensity})`;
-      // Формируем и выводим в блок текст с формулой цвета его фона
+      // We form and display a text with a formula of the color of its background to the block
       square.innerText =
         "#" + 
         toHex(redIntensity) +
@@ -20,49 +20,49 @@
         toHex(blueIntensity);
     });
 
-    //Функция преобразования десятичного значения в шестнадцатиричное
+    // Function for converting decimal value to hexadecimal
     function toHex(d) {
       return ("0" + Number(d).toString(16)).slice(-2).toUpperCase();
     }
-  })(); // осуществляем самозапуск этой функции
+  })(); // we are self-starting this function
 
 
-  // Задача №2
+  // Task №2
   function changeSrcForImages(newUrl) {
-    // Находим блок main
+    // Find the main block
     let main = document.getElementById("main");
-    // В блоке main находим все изображения
+    // In the main block we find all the images
     let images = main.getElementsByTagName("img");
-    // Заменяем источники для первых 5-и картинок
+    // Replacing the sources for the first 5 images
     for (let i = 0; i < 5; i++) {
       images[i].setAttribute("src", newUrl);
     }
   }
-  // Вызываем функцию замена изображений
+  // Calling the replace images function
   changeSrcForImages("https://via.placeholder.com/100/0000D0/ffffff");
 
 
-  // Задача №3
+  // Task №3
   (function showImagesGalery() {
-    // Находим контейнер для отображения миниатюр изображений
+    // We find a container for displaying thumbnails of images
     let imagesWrapper = document.getElementById("imagesList");
-    // Находим контейнер для вывода большого изобрежения
+    // We find a container for displaying a large image
     let imgFullSizeContainer = document.getElementById("imgFullSizeContainer");
-    // Создаем элемент для вывода большого изображения
+    // Creating an element for displaying a large image
     let fullSizeImg = document.createElement("img");
-    // Указываем для этого атрибут id, чтобы к нему потом можно было проще обращаться
+    // We specify the id attribute for this, so that it can be easier to access it later
     fullSizeImg.setAttribute("id", "full-size-img");
-    // Указываем стартовое значение
+    // Specify the starting value
     fullSizeImg.setAttribute(
       "src",
       "https://via.placeholder.com/100/330099/ffffff"
     );
-    // Устанавливаем размер для отображения этого изображения
+    // Setting the size to display this image
     fullSizeImg.style.width = "300px";
-    // Добавляем этот элемент в контейнер
+    // Adding this element to the container
     imgFullSizeContainer.appendChild(fullSizeImg);
 
-    // Массив изображений
+    // Array of images
     let imgSrc = [
       "https://via.placeholder.com/100/330099/ffffff",
       "https://via.placeholder.com/100/FF00FF/ffffff",
@@ -72,29 +72,29 @@
       "https://via.placeholder.com/100/00CC66/ffffff",
       "https://via.placeholder.com/100/999900/ffffff",
     ];
-    // Длина массива изображений
+    // Length of the image array
     let imgSrcLength = imgSrc.length;
-    // Создаем массив для хранения изображений
+    // Creating an array to store images
     let images = new Array(imgSrcLength);
-    // Отображаем миниатюры изображений
+    // Displays thumbnails of images
     for (let i = 0; i < imgSrcLength; i++) {
-      // Создаем элемент для вывода изображения
+      // Creating an element for image output
       images[i] = document.createElement("img");
-      // Указываем для этого элемента источник картинки
+      // We specify the source of the image for this element
       images[i].setAttribute("src", imgSrc[i]);
-      // Прикрепляем слушатель событий к миниатюре изображения
+      // Attaching the event listener to the thumbnail image
       images[i].addEventListener("click", () => {
         document
           .getElementById("full-size-img")
           .setAttribute("src", imgSrc[i]);
       });
-      // Добавляем элемент в контейнер миниатюр
+      // Adding an element to the thumbnail container
       imagesWrapper.appendChild(images[i]);
     }
   })();
 
-  // Задача №4
-  // Определяем массив объектов с данными о товарах
+  // Task №4
+  // Defining an array of objects with product data
   let offers = [
     { 
       title: "Offer title 1", 
@@ -113,7 +113,7 @@
     },
   ];
 
-  // Формируем таблицу и ее заголовок
+  // We form a table and its title
   let table =
     "<table width='400px'>" +
     "<tr>" +
@@ -122,10 +122,10 @@
       "<th>Count</th>" +
       "<th>Amount</th>" + 
     "</tr>";
-  // Определяем переменные для расчета количества единиц товаров и их общей стоимости
+  // We define variables for calculating the number of units of goods and their total cost
   let itemsAmount = 0;
   let itemsTotalCost = 0;
-  // Формируем строку таблицы с данными
+  // Forming a row of the data table
   for (let i = 0; i < offers.length; i++) {
     table +=
       "<tr><td>" +
@@ -143,7 +143,7 @@
     itemsAmount += offers[i].count;
     itemsTotalCost += offers[i].unit_price * offers[i].count;
   }
-  // Формируем итоговую строку таблицы
+  // Forming the final row of the table
   table +=
     "<tr><td colspan = '2'>Total: </td>" +
     "<td align='right'>" +
@@ -152,8 +152,8 @@
     "<td align='right'>" +
     itemsTotalCost.toFixed(2) +
     "</td></tr>";
-  // Закрываем таблицу
+  // Closing the table
   table += "</table>";
 
-  // Выводим таблицу с данными
+  // Output a table with data
   document.getElementById("offersList").innerHTML = table;
